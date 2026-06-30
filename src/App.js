@@ -151,13 +151,29 @@ function PageOne({ onOpenResume }) {
 
 function PageTwo({ onBack }) {
   return (
-    <div className="desktop" onDoubleClick={onBack}>
+    <div className="desktop">
       <div className="wallpaper" />
       <MenuBar />
+
+      <div className="pdf-window">
+        <div className="pdf-window-header">
+          <div className="modal-buttons">
+            <button className="modal-btn close" onClick={onBack} title="Close" />
+            <button className="modal-btn minimize" title="Minimize" />
+            <button className="modal-btn maximize" title="Maximize" />
+          </div>
+          <span className="pdf-window-title">govardhans resume.pdf</span>
+        </div>
+        <div className="pdf-window-body">
+          <iframe
+            src="/resume.pdf"
+            title="Govardhan R Dev Resume"
+            className="pdf-frame"
+          />
+        </div>
+      </div>
+
       <Dock />
-      <button className="back-button" onClick={onBack} title="Back to Desktop">
-        ← Back
-      </button>
     </div>
   );
 }
