@@ -3,7 +3,7 @@ import './App.css';
 
 // Asset URLs from Figma
 const resumeIcon = "https://www.figma.com/api/mcp/asset/6e6d6101-d1b4-4196-8449-4b06eaa0d636";
-const dockBg = "https://www.figma.com/api/mcp/asset/1a120679-3bad-457b-8866-a1e065dba144";
+
 
 // Dock app icons using system emoji / SVG representations
 const dockApps = [
