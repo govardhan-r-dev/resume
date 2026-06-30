@@ -1,0 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, html, #root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  user-select: none;
+}
+
+/* ── Desktop ── */
+.desktop {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Wallpaper ── */
+.wallpaper {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 60%, #b8d4f0 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 30%, #7fb3e8 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 80%, #4a90d9 0%, transparent 50%),
+    linear-gradient(135deg, #c8dff5 0%, #6aaee0 25%, #2e78c5 50%, #1a5fa8 70%, #0d4a8c 100%);
+  z-index: 0;
+}
+
+/* Add wave-like effect */
+.wallpaper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 10%, rgba(255,230,180,0.4) 0%, transparent 40%),
+    radial-gradient(ellipse at 10% 30%, rgba(200,220,255,0.3) 0%, transparent 40%),
+    radial-gradient(ellipse at 60% 90%, rgba(30,100,200,0.5) 0%, transparent 40%);
+}
+
+/* ── Menu Bar ── */
+.menubar {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.menubar-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.apple-logo {
+  font-size: 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  color: #1c1c1e;
+}
+
+.menu-item {
+  font-size: 13px;
+  color: #1c1c1e;
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+  letter-spacing: -0.01em;
+}
+
+.menu-item-bold {
+  font-weight: 700;
+}
+
+.menu-item:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+.menubar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-icon {
+  font-size: 13px;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.menu-time {
+  font-size: 12px;
+  color: #1c1c1e;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* ── Search Bar ── */
+.search-container {
+  position: absolute;
+  top: 148px;
+  left: 50%;
+  transform: translateX(-60%);
+  z-index: 50;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 300px;
+  height: 44px;
+  padding: 0 16px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 14px;
+  border: 1.5px solid rgba(255,255,255,0.9);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s, background 0.2s;
+}
+
+.search-wrapper.focused {
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.16), 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-icon {
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1c1c1e;
+  outline: none;
+  letter-spacing: -0.01em;
+}
+
+.search-input::placeholder {
+  color: #8e8e93;
+}
+
+/* ── Desktop Icons Area ── */
+.desktop-icons-area {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 12px;
+}
+
+/* Position the resume icon similar to Figma design (~35% from left, ~40% from top) */
+.desktop-icons-area .desktop-icon:first-child {
+  position: absolute;
+  left: 32%;
+  top: 38%;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  width: 76px;
+  transition: background 0.15s;
+}
+
+.desktop-icon:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.desktop-icon.selected {
+  background: rgba(0,120,255,0.25);
+}
+
+.desktop-icon-img {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+}
+
+.desktop-icon-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.desktop-icon-label {
+  font-size: 11px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  font-weight: 500;
+  line-height: 1.3;
+  word-break: break-word;
+  max-width: 72px;
+  padding: 1px 3px;
+  border-radius: 3px;
+}
+
+.label-selected {
+  background: rgba(0,120,255,0.7);
+  color: #fff;
+}
+
+/* ── Dock ── */
+.dock-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.dock {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.2),
+    0 2px 8px rgba(0,0,0,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.dock-item {
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.dock-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: filter 0.1s;
+}
+
+.dock-icon:hover {
+  filter: brightness(1.1);
+}
+
+/* ── Modal ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: rgba(245,245,247,0.95);
+  backdrop-filter: blur(30px);
+  border-radius: 12px;
+  width: 380px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.2);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  background: rgba(235,235,240,0.9);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.modal-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-btn.close { background: #ff5f57; }
+.modal-btn.minimize { background: #febc2e; }
+.modal-btn.maximize { background: #28c840; }
+
+.modal-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: 600;
+  color: #1c1c1e;
+}
+
+.modal-body {
+  padding: 32px;
+  text-align: center;
+  font-size: 15px;
+  color: #1c1c1e;
+}
