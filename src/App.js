@@ -4,7 +4,6 @@ import './App.css';
 // Asset URLs from Figma
 const resumeIcon = "https://www.figma.com/api/mcp/asset/6e6d6101-d1b4-4196-8449-4b06eaa0d636";
 
-
 // Dock app icons using system emoji / SVG representations
 const dockApps = [
   { name: 'Finder', emoji: '🔵', color: '#1d6ef5' },
@@ -84,14 +83,14 @@ function SearchBar() {
   );
 }
 
-function DesktopIcon({ name, icon, onClick }) {
+function DesktopIcon({ name, icon, onOpen }) {
   const [selected, setSelected] = useState(false);
 
   return (
     <div
       className={`desktop-icon ${selected ? 'selected' : ''}`}
-      onClick={() => { setSelected(!selected); if (onClick) onClick(); }}
-      onDoubleClick={() => setSelected(false)}
+      onClick={() => setSelected(true)}
+      onDoubleClick={() => { setSelected(false); if (onOpen) onOpen(); }}
     >
       <div className="desktop-icon-img">
         <img src={icon} alt={name} />
@@ -130,56 +129,43 @@ function Dock() {
   );
 }
 
-function ResumeModal({ onClose }) {
+function PageOne({ onOpenResume }) {
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
-          <div className="modal-buttons">
-            <button className="modal-btn close" onClick={onClose} />
-            <button className="modal-btn minimize" />
-            <button className="modal-btn maximize" />
-          </div>
-          <span className="modal-title">govardhans resume.pdf</span>
-        </div>
-        <div className="modal-body">
-          <p>📄 govardhans resume.pdf</p>
-          <p style={{ color: '#8e8e93', marginTop: 8, fontSize: 13 }}>
-            Double-click to open the PDF viewer.
-          </p>
-        </div>
+    <div className="desktop">
+      <div className="wallpaper" />
+      <MenuBar />
+      <div className="search-container">
+        <SearchBar />
       </div>
+      <div className="desktop-icons-area">
+        <DesktopIcon
+          name="govardhans resume"
+          icon={resumeIcon}
+          onOpen={onOpenResume}
+        />
+      </div>
+      <Dock />
+    </div>
+  );
+}
+
+function PageTwo({ onBack }) {
+  return (
+    <div className="desktop" onDoubleClick={onBack}>
+      <div className="wallpaper" />
+      <MenuBar />
+      <Dock />
+      <button className="back-button" onClick={onBack} title="Back to Desktop">
+        ← Back
+      </button>
     </div>
   );
 }
 
 export default function App() {
-  const [showModal, setShowModal] = useState(false);
+  const [page, setPage] = useState(1);
 
-  return (
-    <div className="desktop">
-      {/* macOS Wallpaper gradient */}
-      <div className="wallpaper" />
-
-      <MenuBar />
-
-      {/* Search bar in center-upper area */}
-      <div className="search-container">
-        <SearchBar />
-      </div>
-
-      {/* Desktop Icons */}
-      <div className="desktop-icons-area">
-        <DesktopIcon
-          name="govardhans resume"
-          icon={resumeIcon}
-          onClick={() => setShowModal(true)}
-        />
-      </div>
-
-      <Dock />
-
-      {showModal && <ResumeModal onClose={() => setShowModal(false)} />}
-    </div>
-  );
+  return page === 1
+    ? <PageOne onOpenResume={() => setPage(2)} />
+    : <PageTwo onBack={() => setPage(1)} />;
 }
